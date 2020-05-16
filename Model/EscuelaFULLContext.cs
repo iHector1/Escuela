@@ -29,7 +29,7 @@ namespace Escuela.Model
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=PC-AD-PC;Database=EscuelaFULL;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=tcp:ceti.database.windows.net,1433;Initial Catalog=EscuelaFULL;Persist Security Info=False;User ID=Equipo2;Password=Lospatrones2000;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
