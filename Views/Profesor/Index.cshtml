@@ -1,0 +1,74 @@
+@model IEnumerable<Escuela.Model.Profesor>
+@{
+    Layout="~/Views/Shared/elLayout.cshtml";
+}
+<style>
+    body{
+        background-color: #c1c1c2;
+    }
+</style>
+<h1>Lista de Profesores</h1>
+<p> 
+    @Html.ActionLink("Crear un nuevo profesor","Create")
+</p>
+
+
+<table class="table">
+<tr>
+    <th>
+        Nomina 
+    </th>
+    <th>
+        Nombre
+    </th>
+    <th>
+        Apellido Paterno
+    </th>
+    <th>
+        Apelido Materno
+    </th>
+    <th>
+        Horas Asignadas
+    </th>
+    <th>
+        Fecha de Nacimiento 
+    </th>
+    <th>
+        Correo
+    </th>
+    <th>
+        Curp
+    </th>
+</tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.NominaProfesor)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.NombreProfesor)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.ApellidoPaternoProfesor)
+        </td>
+                <td>
+            @Html.DisplayFor(ModelItem=>item.ApelidoMaternoProfesor)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.HorasAsignadasProfesor)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.FechaNacimientoProfesor)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.CorreoProfesor)
+        </td>
+        <td>
+            @Html.DisplayFor(ModelItem=>item.CurpProfesor)
+        </td>
+    </tr>
+    
+}
+
+</table>
