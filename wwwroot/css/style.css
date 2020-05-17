@@ -72,7 +72,12 @@ main {
   margin-left: 1rem;
 
 }
-.nav-item:hover .link-text{
+.nav-item:hover .link-text {
+  color:#0c9463;
+  transition: var(--transition-speed);
+}
+.nav-item:hover svg{
+  transition: var(--transition-speed);
   color:#0c9463;
 }
 .nav-link svg {
