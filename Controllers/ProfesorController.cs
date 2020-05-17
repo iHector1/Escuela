@@ -11,7 +11,7 @@ namespace Escuela.Controllers
 {
     public class ProfesorController : Controller
     {
-        public IActionResult Index()
+        public IActionResult lista_profesores()
         {
             EscuelaFULLContext db = new EscuelaFULLContext();
             return View(db.Profesor.ToList());
