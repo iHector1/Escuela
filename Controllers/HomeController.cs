@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Escuela.Models;
+using Escuela.Model;
+using System.Web;
 
 namespace Escuela.Controllers
 {
@@ -18,8 +20,9 @@ namespace Escuela.Controllers
            _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index( string message="")
         {
+            ViewBag.Messge = message;
             return View();
         }
 
@@ -27,9 +30,25 @@ namespace Escuela.Controllers
         {
             return View();
         }
-        public IActionResult login()
+        [HttpPost]
+        public IActionResult login(string Nomina ,string contraseña)
         {
-            return View();
+            if (!string.IsNullOrEmpty(Nomina) && !string.IsNullOrEmpty(contraseña)) { 
+            int nomina = Int32.Parse(Nomina);
+            EscuelaFULLContext db = new EscuelaFULLContext();
+            var user =db.Profesor.FirstOrDefault(p => p.NominaProfesor == nomina && p.ContraseñaProfesor == contraseña);
+                if (user!=null) {
+                    return RedirectToAction("lista_profesores", "Profesor");
+                }
+                else { 
+                    //hay error con los datos del usuario 
+                    return Index("No encotramos los datos");
+                }
+            }
+            else {
+                return Index("llena los campos para iniciar sesion");
+
+            }
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/formato.css" />
+    <title>Login</title>
+</head>
+<body>
+    @{
+        if(string.IsNullOrEmpty(ViewBag.Message)){
+            <div class="alert alert-warning">@ViewBag.Message</div>
+        }
+    }
+    <form action="/Home/login" method="POST">
+    <div class="form">
+        <h1> Iniciar Sesion </h1>
+        <input type="text" id="Nombre" autocomplete="off" required name="Nomina">
+        <label for="text" class="labelNombre">
+            <span class="contentNombre">Nomina</span>
+        </label>
+        <input type="password" id="contra" required name="contraseña">
+        <label for="pass" class="labelContra">
+            <span class="contentContra">Contraseña</span>
+        </label>
+        <button class="btn">
+            <span>Confirmar</span>
+        </button>
+    </div>
+    </form>
+</body>
+</html>
