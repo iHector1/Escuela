@@ -14,12 +14,12 @@ namespace Escuela.Controllers {
             return View (db.Profesor.ToList ());
         }
 
-        public IActionResult Crear_Profesores () {
+        public IActionResult Crear_Profesor () {
 
             return View ();
         }
         [HttpPost]
-        public IActionResult Crear_Profesores (Profesor profesor) {
+        public IActionResult Crear_Profesor (Profesor profesor) {
 
             return View ();
         }
