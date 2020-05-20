@@ -14,14 +14,25 @@ namespace Escuela.Controllers {
             return View (db.Profesor.ToList ());
         }
         [HttpGet]
-        public IActionResult Crear_Profesor () {
-
+        public IActionResult Crear_Profesor () {//vista para crear profesores
+            
             return View ();
         }
         [HttpPost]
         public IActionResult Crear_Profesor (Profesor profesor) {
-
-            return View ();
+            try
+            {
+                using (var db = new EscuelaFULLContext()) {// se hace la conexion a la base de datos 
+                    db.Profesor.Add(profesor);//crea al profesor
+                    db.SaveChanges();//salva los cambios
+                    return RedirectToAction("lista_profesores");//reedireciona a la lista de profesores
+                }
+            }
+            catch (System.Exception)
+            {
+                return View ();
+            }
+            
         }
     }
 }
