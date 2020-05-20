@@ -13,7 +13,7 @@ namespace Escuela.Controllers {
             EscuelaFULLContext db = new EscuelaFULLContext ();
             return View (db.Profesor.ToList ());
         }
-
+        [HttpGet]
         public IActionResult Crear_Profesor () {
 
             return View ();

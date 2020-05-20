@@ -3,10 +3,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/formato.css" />
+    
     <title>Login</title>
 </head>
 <body>
+        @{
+        if(string.IsNullOrEmpty(ViewBag.Message)){
+            <div class="alert alert-warning">@ViewBag.Message</div>
+        }
+    }
+    <form action="/Home/login" method="POST">
     <div class="form">
+        
         <h1> Iniciar Sesion </h1>
         <input type="text" id="Nombre" autocomplete="off" required name="Nomina">
         <label for="text" class="labelNombre">
@@ -20,5 +28,6 @@
             <span>Confirmar</span>
         </button>
     </div>
+    </form>
 </body>
 </html>

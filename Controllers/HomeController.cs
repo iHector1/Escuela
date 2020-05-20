@@ -30,6 +30,11 @@ namespace Escuela.Controllers
         {
             return View();
         }
+        public IActionResult login(string message="") { 
+                        ViewBag.Messge = message;
+
+            return View();
+        }
         [HttpPost]
         public IActionResult login(string Nomina ,string contraseña)
         {
@@ -42,12 +47,11 @@ namespace Escuela.Controllers
                 }
                 else { 
                     //hay error con los datos del usuario 
-                    return Index("No encotramos los datos");
+                    return login("No encotramos los datos");
                 }
             }
             else {
-                return Index("llena los campos para iniciar sesion");
-
+                return login("llena los campos para iniciar sesion");
             }
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
