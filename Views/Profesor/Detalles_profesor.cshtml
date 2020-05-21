@@ -1,0 +1,91 @@
+@model Escuela.Model.Profesor
+
+@{
+    ViewData["Title"] = "Details";
+    Layout="~/Views/Shared/elLayout.cshtml";
+}
+
+<h1>Detalles</h1>
+
+<div>
+    <h4>Profesor</h4>
+    <hr />
+    <dl class="row">
+         @Html.AntiForgeryToken()
+        <dt class="col-sm-2">
+            Nombre Profesor
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NombreProfesor)
+        </dd>
+        <dt class="col-sm-2">
+            Apellido Paterno
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApellidoPaternoProfesor)
+        </dd>
+        <dt class="col-sm-2">
+            Apellido Materno 
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApelidoMaternoProfesor)
+        </dd>
+        <dt class="col-sm-2">
+            Fecha Nacimiento
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaNacimientoProfesor)
+        </dd>
+        <dt class="col-sm-2">
+            Correo
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CorreoProfesor)
+        </dd>
+        <dt class="col-sm-2">
+           Horas Asignadas
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HorasAsignadasProfesor)
+        </dd>
+        <dt class="col-sm-2">
+            Curp
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurpProfesor)
+        </dd>
+        <dt class="col-sm-2">
+            Contrato
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if(Model.IdContrato==1){
+                    <span>Base</span>
+                }
+                if(Model.IdContrato==2){
+                    <span>Asignatura</span>
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Plantel
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                if(Model.IdPlantel==1){
+                    <span>Colomos</span>
+                }
+                if(Model.IdPlantel==2){
+                    <span>Tonala</span>
+                }
+                 if(Model.IdPlantel==3){
+                    <span>Rio Santiago</span>
+                }
+            }
+        </dd>
+    </dl>
+</div>
+        @Html.ActionLink("Regresar","lista_profesores")
+<div>
+
+</div>

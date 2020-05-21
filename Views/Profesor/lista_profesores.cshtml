@@ -2,18 +2,8 @@
 @{
     Layout="~/Views/Shared/elLayout.cshtml";
 }
-<style>
-    body{
-        background-color: #c1c1c2;
-    }
-</style>
 <h1>Lista de Profesores</h1>
-<p> 
-    @Html.ActionLink("Crear un nuevo profesor","Crear_Profesor")
-</p>
-
-
-<table class="table">
+<table class="table table-hover">
 <tr>
     <th>
         Nomina 
@@ -31,13 +21,10 @@
         Horas Asignadas
     </th>
     <th>
-        Fecha de Nacimiento 
-    </th>
-    <th>
         Correo
     </th>
     <th>
-        Curp
+        <a asp-controller="Profesor" asp-action="Crear_profesor" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Profesor</a>
     </th>
 </tr>
 @foreach (var item in Model)
@@ -59,13 +46,13 @@
             @Html.DisplayFor(ModelItem=>item.HorasAsignadasProfesor)
         </td>
         <td>
-            @Html.DisplayFor(ModelItem=>item.FechaNacimientoProfesor)
-        </td>
-        <td>
             @Html.DisplayFor(ModelItem=>item.CorreoProfesor)
         </td>
         <td>
-            @Html.DisplayFor(ModelItem=>item.CurpProfesor)
+                <a asp-controller="Profesor" asp-action="Editar_profesor" asp-route-id="@item.NominaProfesor"><i class="fas fa-marker"> </i> </a> 
+                <a asp-controller="Profesor" asp-action="Eliminar_profesor" asp-route-id=@item.NominaProfesor class="text-danger ml-1" onclick="return confirm('¿Estas seguro de eliminar a este profesor?')"><i class="far fa-trash-alt"></i> </a>  
+                <a style="color: white;"> . </a>
+                <a asp-controller="Profesor" asp-action="Detalles_profesor" asp-route-id="@item.NominaProfesor"> <i class="fas fa-info"></i> </a> 
         </td>
     </tr>
     
