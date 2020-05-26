@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Data;
 using System.Threading.Tasks;
 using Escuela.Model;
 using Escuela.Models;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 namespace Escuela.Controllers {
     public class ProfesorController : Controller {
+        
+        
         public IActionResult lista_profesores () {
             EscuelaFULLContext db = new EscuelaFULLContext ();
             return View (db.Profesor.ToList ());
@@ -23,7 +26,6 @@ namespace Escuela.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Crear_Profesor (Profesor profesor) {
-
             if (!ModelState.IsValid) return View ();
             try {
                 using (var db = new EscuelaFULLContext ()) { // se hace la conexion a la base de datos 
@@ -33,7 +35,7 @@ namespace Escuela.Controllers {
                 }
             } catch (System.Exception ex) {
                 ModelState.AddModelError ("No se puede Insertar al alumno", ex.Message);
-                return View ();
+                return View (); 
             }
 
         }
@@ -43,7 +45,7 @@ namespace Escuela.Controllers {
             int nomina = id;
             try {
                 using (var db = new EscuelaFULLContext ()) {
-                    Profesor profesor = db.Profesor.Find (nomina);
+                    Profesor profesor = db.Profesor.Where(a => a.NominaProfesor == nomina).FirstOrDefault();
                     return View (profesor);
                 }
             } catch (System.Exception ex) {
@@ -56,9 +58,11 @@ namespace Escuela.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Editar_profesor (Profesor profesor) {
+            if (!ModelState.IsValid) return View ();
             try {
                 using (var db = new EscuelaFULLContext ()) {
                     Profesor pro = db.Profesor.Find (profesor.NominaProfesor);
+                    pro.NombreProfesor = profesor.NombreProfesor;
                     pro.ApellidoPaternoProfesor = profesor.ApellidoPaternoProfesor;
                     pro.FechaNacimientoProfesor = profesor.FechaNacimientoProfesor;
                     pro.CorreoProfesor = profesor.CorreoProfesor;
@@ -67,6 +71,7 @@ namespace Escuela.Controllers {
                     pro.IdPlantel = profesor.IdPlantel;
                     pro.HorasAsignadasProfesor = profesor.HorasAsignadasProfesor;
                     pro.CurpProfesor = profesor.CurpProfesor;
+                    db.Update(pro);
                     db.SaveChanges ();
                     return RedirectToAction ("lista_profesores");
                 }
