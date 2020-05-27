@@ -8,6 +8,7 @@ using Escuela.Model;
 using Escuela.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Escuela.library;
 namespace Escuela.Controllers {
     public class ProfesorController : Controller {
         
@@ -29,6 +30,7 @@ namespace Escuela.Controllers {
             if (!ModelState.IsValid) return View ();
             try {
                 using (var db = new EscuelaFULLContext ()) { // se hace la conexion a la base de datos 
+                    profesor.ContraseñaProfesor = Seguridad.Encriptar(profesor.ContraseñaProfesor);
                     db.Profesor.Add (profesor); //crea al profesor
                     db.SaveChanges (); //salva los cambios
                     return RedirectToAction ("lista_profesores"); //reedireciona a la lista de profesores
@@ -64,9 +66,10 @@ namespace Escuela.Controllers {
                     Profesor pro = db.Profesor.Find (profesor.NominaProfesor);
                     pro.NombreProfesor = profesor.NombreProfesor;
                     pro.ApellidoPaternoProfesor = profesor.ApellidoPaternoProfesor;
+                    pro.ApelidoMaternoProfesor = profesor.ApelidoMaternoProfesor;
                     pro.FechaNacimientoProfesor = profesor.FechaNacimientoProfesor;
                     pro.CorreoProfesor = profesor.CorreoProfesor;
-                    pro.ContraseñaProfesor = profesor.ContraseñaProfesor;
+                    pro.ContraseñaProfesor = Seguridad.Encriptar(profesor.ContraseñaProfesor);
                     pro.IdContrato = profesor.IdContrato;
                     pro.IdPlantel = profesor.IdPlantel;
                     pro.HorasAsignadasProfesor = profesor.HorasAsignadasProfesor;
@@ -91,6 +94,7 @@ namespace Escuela.Controllers {
         public IActionResult Detalles_profesor (int id) {
             using (var db = new EscuelaFULLContext ()) {
                 Profesor profesor = db.Profesor.Find (id);
+                profesor.ContraseñaProfesor = Seguridad.Encriptar(profesor.ContraseñaProfesor);
                 return View (profesor);
             }
 

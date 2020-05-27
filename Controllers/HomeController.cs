@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Escuela.Models;
 using Escuela.Model;
 using System.Web;
+using Escuela.library;
 
 namespace Escuela.Controllers
 {
@@ -40,9 +41,10 @@ namespace Escuela.Controllers
         {
             if (!string.IsNullOrEmpty(Nomina) && !string.IsNullOrEmpty(contraseña)) { 
             int nomina = Int32.Parse(Nomina);
-            EscuelaFULLContext db = new EscuelaFULLContext();
+                contraseña = Seguridad.Encriptar(contraseña);
+                EscuelaFULLContext db = new EscuelaFULLContext();
             var user =db.Profesor.FirstOrDefault(p => p.NominaProfesor == nomina && p.ContraseñaProfesor == contraseña);
-                if (user!=null) {
+                if (user!=null) {  
                     return RedirectToAction("lista_profesores", "Profesor");
                 }
                 else { 
