@@ -12,7 +12,31 @@ using Escuela.library;
 namespace Escuela.Controllers {
     public class ProfesorController : Controller {
         
-        
+        public IActionResult login(string message="") { 
+                        ViewBag.Messge = message;
+
+            return View();
+        }
+        [HttpPost]
+        public IActionResult login(string Nomina ,string contraseña)
+        {
+            if (!string.IsNullOrEmpty(Nomina) && !string.IsNullOrEmpty(contraseña)) { 
+            int nomina = Int32.Parse(Nomina);
+                contraseña = Seguridad.Encriptar(contraseña);
+                EscuelaFULLContext db = new EscuelaFULLContext();
+            var user =db.Profesor.FirstOrDefault(p => p.NominaProfesor == nomina && p.ContraseñaProfesor == contraseña);
+                if (user!=null) {  
+                    return RedirectToAction("lista_profesores", "Profesor");
+                }
+                else { 
+                    //hay error con los datos del usuario 
+                    return login("No encotramos los datos");
+                }
+            }
+            else {
+                return login("llena los campos para iniciar sesion");
+            }
+        }
         public IActionResult lista_profesores () {
             EscuelaFULLContext db = new EscuelaFULLContext ();
             return View (db.Profesor.ToList ());

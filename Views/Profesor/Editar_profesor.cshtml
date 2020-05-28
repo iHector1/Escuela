@@ -1,10 +1,10 @@
 @model Escuela.Model.Profesor
 @{
-        ViewData["Title"] = "Crear profesor";
-        Layout="~/Views/Shared/elLayout.cshtml";
+    ViewData["Title"] = "Editar";
+    Layout="~/Views/Shared/elLayout.cshtml";
 }
 
-<h1>Editar</h1>
+<h1>Edit</h1>
 
 <h4>Profesor</h4>
 <hr />
@@ -16,60 +16,51 @@
             <div class="form-group">
                 <label asp-for="NombreProfesor" class="control-label"></label>
                 <input asp-for="NombreProfesor" class="form-control" />
-                <span asp-validation-for="NombreProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ApellidoPaternoProfesor" class="control-label"></label>
                 <input asp-for="ApellidoPaternoProfesor" class="form-control" />
-                <span asp-validation-for="ApellidoPaternoProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ApelidoMaternoProfesor" class="control-label"></label>
                 <input asp-for="ApelidoMaternoProfesor" class="form-control" />
-                <span asp-validation-for="ApelidoMaternoProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FechaNacimientoProfesor" class="control-label"></label>
                 <input asp-for="FechaNacimientoProfesor" class="form-control" />
-                <span asp-validation-for="FechaNacimientoProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CorreoProfesor" class="control-label"></label>
                 <input asp-for="CorreoProfesor" class="form-control" />
-                <span asp-validation-for="CorreoProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ContraseñaProfesor" class="control-label"></label>
                 <input asp-for="ContraseñaProfesor" class="form-control" />
-                <span asp-validation-for="ContraseñaProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdContrato" class="control-label"></label>
-                <select asp-for="IdContrato" class="form-control" asp-items="ViewBag.IdContrato" required>
+                <select asp-for="IdContrato" class="form-control" asp-items="ViewBag.IdContrato">
                         <option ></option> 
                         <option value="1" >Base</option>
                         <option value="2">Asignatura</option>
                 </select>
-                <span asp-validation-for="IdContrato" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdPlantel" class="control-label"></label>
-                <select asp-for="IdPlantel" class="form-control" asp-items="ViewBag.IdPlantel"r equired>
+                <select asp-for="IdPlantel" class="form-control" asp-items="ViewBag.IdPlantel">
                      <option ></option> 
                       <option value="1">Colomos</option> 
                         <option value="2" >Tonala</option>
-                        <option value="3">Rio Santiago</option></select>
-                <span asp-validation-for="IdPlantel" class="text-danger"></span>
+                        <option value="3">Rio Santiago</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="HorasAsignadasProfesor" class="control-label"></label>
                 <input asp-for="HorasAsignadasProfesor" class="form-control" />
-                <span asp-validation-for="HorasAsignadasProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CurpProfesor" class="control-label"></label>
                 <input asp-for="CurpProfesor" class="form-control" />
-                <span asp-validation-for="CurpProfesor" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -79,5 +70,9 @@
 </div>
 
 <div>
-    <a asp-controller="Profesor" asp-action="lista_profesores">Regresar a la lista </a>
+    <a asp-action="lista_profesores">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

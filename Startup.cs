@@ -50,7 +50,7 @@ namespace Escuela
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Profesor}/{action=login}/{id?}");
             });
         }
     }
