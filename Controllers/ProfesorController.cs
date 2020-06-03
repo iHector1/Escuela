@@ -126,9 +126,10 @@ namespace Escuela.Controllers {
 
         }
         [HttpGet]
-        public IActionResult lista_permisos () {//Se busca al profesor y muestra sus resultados
+        public IActionResult lista_permisos (int nomina) {//Se busca al profesor y muestra sus resultados de sus permisos
             EscuelaFULLContext db = new EscuelaFULLContext();
-            List<Permiso> permisos = db.Permiso.Where(a=>a.Nomina==nomina).ToList();
+            int Nomina = nomina;
+            List<Permiso> permisos = db.Permiso.Where(a=>a.Nomina==Nomina).ToList();
             return View (permisos);
         }
     }

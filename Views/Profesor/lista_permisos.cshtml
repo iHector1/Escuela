@@ -14,31 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.MotivoPermiso)
+                ID Permiso
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaSolicitudPermiso)
+                 Hora Inicio
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaInicioPermiso)
+                Hora Temino
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FechaTerminoPermiso)
+                Estado
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HoraInicioPermiso)
+                Profesor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HoraTeminoPermiso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nomina)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoPermiso)
+                Tipo de Permiso
             </th>
             <th></th>
         </tr>
@@ -47,16 +38,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MotivoPermiso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaSolicitudPermiso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicioPermiso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaTerminoPermiso)
+                @Html.DisplayFor(modelItem => item.IdPermiso)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HoraInicioPermiso)
