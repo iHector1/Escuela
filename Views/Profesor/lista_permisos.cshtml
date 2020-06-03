@@ -1,0 +1,84 @@
+@model IEnumerable<Escuela.Model.Permiso>
+
+@{
+    ViewData["Title"] = "Lista de Permisos";
+    Layout="~/Views/Shared/elLayout.cshtml";
+}
+
+<h1>Mis Permisos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MotivoPermiso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaSolicitudPermiso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicioPermiso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaTerminoPermiso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraInicioPermiso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraTeminoPermiso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nomina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoPermiso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotivoPermiso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaSolicitudPermiso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaInicioPermiso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaTerminoPermiso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicioPermiso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraTeminoPermiso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nomina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoPermiso)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdPermiso">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdPermiso">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdPermiso">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

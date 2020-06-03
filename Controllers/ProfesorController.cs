@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 using Escuela.library;
 namespace Escuela.Controllers {
     public class ProfesorController : Controller {
-        
+
+        public int nomina;
         public IActionResult login(string message="") { 
                         ViewBag.Messge = message;
 
@@ -21,12 +22,12 @@ namespace Escuela.Controllers {
         public IActionResult login(string Nomina ,string contraseña)
         {
             if (!string.IsNullOrEmpty(Nomina) && !string.IsNullOrEmpty(contraseña)) { 
-            int nomina = Int32.Parse(Nomina);
+             nomina = Int32.Parse(Nomina);
                 contraseña = Seguridad.Encriptar(contraseña);
                 EscuelaFULLContext db = new EscuelaFULLContext();
             var user =db.Profesor.FirstOrDefault(p => p.NominaProfesor == nomina && p.ContraseñaProfesor == contraseña);
                 if (user!=null) {  
-                    return RedirectToAction("lista_profesores", "Profesor");
+                    return RedirectToAction ("lista_profesores");
                 }
                 else { 
                     //hay error con los datos del usuario 
@@ -37,7 +38,7 @@ namespace Escuela.Controllers {
                 return login("llena los campos para iniciar sesion");
             }
         }
-        public IActionResult lista_profesores () {
+        public IActionResult lista_profesores () {//se crea la lista de profesores
             EscuelaFULLContext db = new EscuelaFULLContext ();
             return View (db.Profesor.ToList ());
         }
@@ -50,7 +51,7 @@ namespace Escuela.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear_Profesor (Profesor profesor) {
+        public IActionResult Crear_Profesor (Profesor profesor) {//se crea al profesor 
             if (!ModelState.IsValid) return View ();
             try {
                 using (var db = new EscuelaFULLContext ()) { // se hace la conexion a la base de datos 
@@ -67,11 +68,12 @@ namespace Escuela.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Editar_profesor (int id) {
+        public IActionResult Editar_profesor (int id) {//Se busca al profesor y muestra sus resultados
             int nomina = id;
             try {
                 using (var db = new EscuelaFULLContext ()) {
                     Profesor profesor = db.Profesor.Where(a => a.NominaProfesor == nomina).FirstOrDefault();
+                    profesor.ContraseñaProfesor = Seguridad.DesEncriptar(profesor.ContraseñaProfesor);
                     return View (profesor);
                 }
             } catch (System.Exception ex) {
@@ -83,10 +85,10 @@ namespace Escuela.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar_profesor (Profesor profesor) {
+        public IActionResult Editar_profesor (Profesor profesor) {//Actualizamos al profesor 
             if (!ModelState.IsValid) return View ();
             try {
-                using (var db = new EscuelaFULLContext ()) {
+                using (var db = new EscuelaFULLContext ()) {//recibimos todos os cambios
                     Profesor pro = db.Profesor.Find (profesor.NominaProfesor);
                     pro.NombreProfesor = profesor.NombreProfesor;
                     pro.ApellidoPaternoProfesor = profesor.ApellidoPaternoProfesor;
@@ -107,7 +109,7 @@ namespace Escuela.Controllers {
                 return View ();
             }
         }
-        public IActionResult Eliminar_profesor (int id) {
+        public IActionResult Eliminar_profesor (int id) {//Se elimnina al profesor 
             using (var db = new EscuelaFULLContext ()) {
                 Profesor profesor = db.Profesor.Find (id);
                 db.Profesor.Remove (profesor);
@@ -115,13 +117,19 @@ namespace Escuela.Controllers {
                 return RedirectToAction ("lista_profesores");
             }
         }
-        public IActionResult Detalles_profesor (int id) {
+        public IActionResult Detalles_profesor (int id) {//Se muestra los detalles del profesor 
             using (var db = new EscuelaFULLContext ()) {
                 Profesor profesor = db.Profesor.Find (id);
                 profesor.ContraseñaProfesor = Seguridad.Encriptar(profesor.ContraseñaProfesor);
                 return View (profesor);
             }
 
+        }
+        [HttpGet]
+        public IActionResult lista_permisos () {//Se busca al profesor y muestra sus resultados
+            EscuelaFULLContext db = new EscuelaFULLContext();
+            List<Permiso> permisos = db.Permiso.Where(a=>a.Nomina==nomina).ToList();
+            return View (permisos);
         }
     }
 }
